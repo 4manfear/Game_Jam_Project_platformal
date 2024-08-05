@@ -6,6 +6,8 @@ public class threed_Player_Movement : MonoBehaviour
 {
     private float moveSpeed ; // Speed of movement
     [SerializeField]
+    private float rotationspeed;
+    [SerializeField]
     private float walkspeed;
 
     [SerializeField]
@@ -40,7 +42,15 @@ public class threed_Player_Movement : MonoBehaviour
         // Calculate the direction relative to the camera
         Vector3 directionofcame = camfroword * movement.z + camright * movement.x;
 
+        Vector3 normalizedDirection = directionofcame.normalized;
+
         // Move the Rigidbody by setting its velocity
         rb.velocity = directionofcame.normalized * moveSpeed;
+
+        if (directionofcame != Vector3.zero)
+        {
+            Quaternion targetrotation = Quaternion.LookRotation(normalizedDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetrotation,   Time.fixedDeltaTime*rotationspeed );
+        }
     }
 }
