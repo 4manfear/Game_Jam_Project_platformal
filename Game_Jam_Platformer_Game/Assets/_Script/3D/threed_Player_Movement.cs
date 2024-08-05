@@ -4,15 +4,43 @@ using UnityEngine;
 
 public class threed_Player_Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private float moveSpeed ; // Speed of movement
+    [SerializeField]
+    private float walkspeed;
+
+    [SerializeField]
+    private Camera threedcamera;
+
+    private Rigidbody rb; // Reference to the Rigidbody component
+
+    private void Start()
     {
-        
+        // Get the Rigidbody component attached to the same GameObject
+        rb = GetComponent<Rigidbody>();
+        moveSpeed = walkspeed;
     }
-                                                
-    // Update is called once per frame
-    void Update()
+
+   
+    private void FixedUpdate()
     {
-        // code 
+        // Read input from the horizontal and vertical axes
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        // Create a local movement vector based on input
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        //taking forword and right of the camera
+        Vector3 camfroword = threedcamera.transform.forward;
+        Vector3 camright = threedcamera.transform.right;
+
+        camfroword.y = 0f;
+        camright.y = 0f;
+
+        // Calculate the direction relative to the camera
+        Vector3 directionofcame = camfroword * movement.z + camright * movement.x;
+
+        // Move the Rigidbody by setting its velocity
+        rb.velocity = directionofcame.normalized * moveSpeed;
     }
 }
