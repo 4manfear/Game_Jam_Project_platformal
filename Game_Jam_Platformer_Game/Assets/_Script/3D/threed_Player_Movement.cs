@@ -4,53 +4,47 @@ using UnityEngine;
 
 public class threed_Player_Movement : MonoBehaviour
 {
-    private float moveSpeed ; // Speed of movement
-    [SerializeField]
-    private float rotationspeed;
+   
+    private float movespeed;
     [SerializeField]
     private float walkspeed;
-
     [SerializeField]
-    private Camera threedcamera;
+    private float runspeed;
+    [SerializeField]
+    private float mouseSensitivity;
 
-    private Rigidbody rb; // Reference to the Rigidbody component
+    float horizontalinput;
+    float verticalinput;
 
+    private float xRotation;
+
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     private void Start()
     {
-        // Get the Rigidbody component attached to the same GameObject
-        rb = GetComponent<Rigidbody>();
-        moveSpeed = walkspeed;
+        movespeed = walkspeed;
     }
 
-   
     private void FixedUpdate()
     {
-        // Read input from the horizontal and vertical axes
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        
 
-        // Create a local movement vector based on input
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        horizontalinput = Input.GetAxisRaw("Horizontal");
+        verticalinput = Input.GetAxisRaw("Vertical");
 
-        //taking forword and right of the camera
-        Vector3 camfroword = threedcamera.transform.forward;
-        Vector3 camright = threedcamera.transform.right;
 
-        camfroword.y = 0f;
-        camright.y = 0f;
+        Vector3 movement = new Vector3(horizontalinput, 0, verticalinput).normalized;
 
-        // Calculate the direction relative to the camera
-        Vector3 directionofcame = camfroword * movement.z + camright * movement.x;
+        // Calculate the velocity based on the movement vector and speed
+        Vector3 velocity = transform.TransformDirection(movement) * movespeed;
 
-        Vector3 normalizedDirection = directionofcame.normalized;
+        // Apply the velocity to the Rigidbody
+        rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
 
-        // Move the Rigidbody by setting its velocity
-        rb.velocity = directionofcame.normalized * moveSpeed;
-
-        if (directionofcame != Vector3.zero)
-        {
-            Quaternion targetrotation = Quaternion.LookRotation(normalizedDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetrotation,   Time.fixedDeltaTime*rotationspeed );
-        }
     }
+
 }
