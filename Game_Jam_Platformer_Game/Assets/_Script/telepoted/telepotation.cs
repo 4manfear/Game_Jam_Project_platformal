@@ -16,12 +16,9 @@ public class telepotation : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (IsCloseTo(transform.position, p1.position))
-            {
-                player.position = p2.position;
-                
-            }
-            else if (IsCloseTo(transform.position, p2.position))
+               
+            
+             if (IsCloseTo(transform.position, p2.position))
             {
                 player.position = p1.position;
             }
