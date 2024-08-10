@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Portal
+  - 2dPlayer
   layers:
   - Default
   - TransparentFX
