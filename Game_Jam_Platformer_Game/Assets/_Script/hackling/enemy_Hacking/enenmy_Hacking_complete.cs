@@ -10,14 +10,14 @@ public class enenmy_Hacking_complete : MonoBehaviour
 
     [Header("enemy script")]
     [SerializeField]
-    private Enemy enemy1,enemy2;
+    private Enemy enemy1;
 
     [Header("level")]
     [SerializeField]
     private GameObject  towdlevel, threedlevel, player1;
 
     [SerializeField]
-    private GameObject enemydistructioneffect1, enemydistructioneffect2;
+    private GameObject enemydistructioneffect1;
 
     private void Update()
     {
@@ -27,9 +27,9 @@ public class enenmy_Hacking_complete : MonoBehaviour
             threedlevel.SetActive(true);
             player1.SetActiveRecursively(true);
             enemy1.GetComponent<Enemy>().enabled = false;
-            enemy2.GetComponent<Enemy>().enabled = false;
+            //enemy2.GetComponent<Enemy>().enabled = false;
             enemydistructioneffect1.SetActive(true);
-            enemydistructioneffect2.SetActive(true);
+            //enemydistructioneffect2.SetActive(true);
         }
     }
 }

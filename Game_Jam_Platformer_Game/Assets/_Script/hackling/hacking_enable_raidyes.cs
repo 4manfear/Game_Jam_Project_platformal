@@ -56,4 +56,13 @@ public class hacking_enable_raidyes : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Set the color for the gizmo
+        Gizmos.color = Color.red;
+
+        // Draw a wireframe sphere at the object's position with a radius of detectionrange
+        Gizmos.DrawWireSphere(transform.position, detectionrange);
+    }
 }
