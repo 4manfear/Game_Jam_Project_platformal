@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    private Animator anim;
+
     private NavMeshAgent agent;
 
     [SerializeField] private Transform PointA, PointB;
@@ -14,6 +17,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private LayerMask playerLayer; // Layer of the player
     [SerializeField] private LayerMask obstacleLayer; // Layer of obstacles that can block the raycast
 
+    [SerializeField]
     private GameObject player;
 
     private void Awake()
@@ -23,12 +27,14 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
+      
         agent.SetDestination(PointA.position);
     }
 
     private void Update()
     {
+        player = GameObject.FindWithTag("Player");
+
         if (PlayerInSight())
         {
             // Chase the player
@@ -53,6 +59,7 @@ public class Enemy : MonoBehaviour
             float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
             if (angleToPlayer <= detectionAngle / 2f)
             {
+                anim.SetFloat("movement_Cuntroller", 1f);
                 // Perform a raycast to see if there is a clear line of sight
                 if (!Physics.Raycast(transform.position, directionToPlayer, detectionRange, obstacleLayer))
                 {
@@ -67,6 +74,7 @@ public class Enemy : MonoBehaviour
 
     private void PatrolBetweenPoints()
     {
+        anim.SetFloat("movement_Cuntroller", 0f);
         // If close to PointA, move to PointB
         if (Vector3.Distance(transform.position, PointA.position) < mindis)
         {

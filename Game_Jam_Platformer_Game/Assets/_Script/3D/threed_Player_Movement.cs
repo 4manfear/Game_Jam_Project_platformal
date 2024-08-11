@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class threed_Player_Movement : MonoBehaviour
 {
-   
+    
     private float movespeed;
     [SerializeField]
     private float walkspeed;
@@ -84,6 +85,15 @@ public class threed_Player_Movement : MonoBehaviour
         // Raycast down from the player's position to check if they are on the ground
         float rayLength = 1.1f; // Slightly more than the player’s height to ensure ground detection
         return Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Robot"))
+        {
+            SceneManager.LoadScene(6);
+        }
+        
     }
 
 
