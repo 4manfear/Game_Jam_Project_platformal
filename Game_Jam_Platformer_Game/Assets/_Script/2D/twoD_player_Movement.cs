@@ -12,8 +12,11 @@ public class twoD_player_Movement : MonoBehaviour
     private float jumpforce;
 
     public bool isjumping;
+    [SerializeField]
+    private LayerMask groundLayer;
 
     Rigidbody rb;
+    private bool isGrounded;
 
     private void Awake()
     {
@@ -51,30 +54,28 @@ public class twoD_player_Movement : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0); 
         }
-        if(isjumping)
-        {
-            rb.AddForce(transform.up * jumpforce, ForceMode.Impulse);
-        }
+        
         
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Check if the player is grounded
+        CheckGrounded();
+
+        // Handle jump input
+        if (isGrounded && Input.GetButtonDown("Jump"))
         {
-            isjumping = true;
-            Debug.Log("pressed");
-            //jumping();
-        }
-        else
-        {
-            isjumping = false;
-            Debug.Log("Realised");
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
         }
     }
 
-    //void jumping()
-    //{
-    //   
-    //}
+    private void CheckGrounded()
+    {
+        // Raycast to check if the player is grounded
+        float rayLength = 1.1f; // Adjust based on the player's height
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
+    }
+
+
 
 }

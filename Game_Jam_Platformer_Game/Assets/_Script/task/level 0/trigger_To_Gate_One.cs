@@ -9,8 +9,8 @@ public class trigger_To_Gate_One : MonoBehaviour
     private GameObject threed_Environment, _Player, twodenvironment;
     [SerializeField]
     private GameObject UI_Intraction;
-
-    public bool canhack;
+    [SerializeField]
+    private bool canhack;
 
     private void Awake()
     {
