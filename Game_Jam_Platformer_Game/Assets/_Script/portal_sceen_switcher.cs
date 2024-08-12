@@ -14,6 +14,10 @@ public class portal_sceen_switcher : MonoBehaviour
         {
             SceneManager.LoadScene(sceenswitchnumber);
         }
+        if(other.gameObject.CompareTag("2dPlayer"))
+        {
+            SceneManager.LoadScene(sceenswitchnumber);
+        }
     }
 
 }

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+
+    enemy_ded_and_not_ded ednd;
+
     [SerializeField]
     private Animator anim;
 
@@ -23,6 +27,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        ednd = GetComponent<enemy_ded_and_not_ded>();
     }
 
     private void Start()
@@ -101,4 +106,17 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            if(ednd.cancaught == true)
+            {
+                SceneManager.LoadScene(5);
+            }
+        }
+    }
+
+
 }

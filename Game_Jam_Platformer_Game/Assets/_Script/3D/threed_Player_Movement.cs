@@ -87,14 +87,7 @@ public class threed_Player_Movement : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Robot"))
-        {
-            SceneManager.LoadScene(6);
-        }
-        
-    }
+   
 
 
 }

@@ -23,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/fall_to_The_Ground.unity
     guid: 2d63489de452f4b4cbc702f85ce1780d
-  - enabled: 1
-    path: Assets/Scenes/Caught_By_enemy.unity
-    guid: 7e1189e2f5396ba4daecb89abd276e91
   m_configObjects: {}

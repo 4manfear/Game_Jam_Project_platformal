@@ -29,7 +29,7 @@ public class hacking_enable_raidyes : MonoBehaviour
 
     private void Update()
     {
-        playerr = GameObject.FindWithTag("Player");
+        //playerr = GameObject.FindWithTag("Player");
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerr.transform.position);
 

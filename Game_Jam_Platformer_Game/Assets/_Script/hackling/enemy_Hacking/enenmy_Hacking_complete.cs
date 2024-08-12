@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class enenmy_Hacking_complete : MonoBehaviour
 {
+    [SerializeField]
+    private Animator anim;
 
     [SerializeField]
     private GameObject crackedthecode;
@@ -23,6 +25,8 @@ public class enenmy_Hacking_complete : MonoBehaviour
     {
         if (crackedthecode.activeSelf)
         {
+            anim.SetFloat("movement_Cuntroller", 2f);
+
             towdlevel.SetActive(false);
             threedlevel.SetActive(true);
             player1.SetActiveRecursively(true);
