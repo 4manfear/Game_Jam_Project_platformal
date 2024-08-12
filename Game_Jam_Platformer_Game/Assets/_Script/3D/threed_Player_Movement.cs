@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class threed_Player_Movement : MonoBehaviour
@@ -26,7 +27,7 @@ public class threed_Player_Movement : MonoBehaviour
     private float jumpForce = 5f; // Force applied for jumping
     [SerializeField]
     private LayerMask groundLayer;
-
+    public bool _is2Denabled;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,20 +39,12 @@ public class threed_Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!_is2Denabled)
+        {
+            HandleMovement();
+        }
+
         
-
-        horizontalinput = Input.GetAxisRaw("Horizontal");
-        verticalinput = Input.GetAxisRaw("Vertical");
-
-
-        Vector3 movement = new Vector3(horizontalinput, 0, verticalinput).normalized;
-
-        // Calculate the velocity based on the movement vector and speed
-        Vector3 velocity = transform.TransformDirection(movement) * movespeed;
-
-        // Apply the velocity to the Rigidbody
-        rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-
     }
 
     private void Update()
@@ -86,8 +79,4 @@ public class threed_Player_Movement : MonoBehaviour
         float rayLength = 1.1f; // Slightly more than the player’s height to ensure ground detection
         return Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayer);
     }
-
-   
-
-
 }

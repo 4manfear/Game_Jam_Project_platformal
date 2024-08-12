@@ -62567,7 +62567,7 @@ GameObject:
   - component: {fileID: 2003379839}
   m_Layer: 0
   m_Name: environment
-  m_TagString: Untagged
+  m_TagString: environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70227,9 +70227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f60164b5fb9a7c418293a4ce31d1837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerr: {fileID: 5180806856438107697}
+  ehc: {fileID: 3398085432609795009}
+  _PlayerMovement: {fileID: 6101769746840858096}
   threed_Environment: {fileID: 2003379838}
-  _Player: {fileID: 5066508272750312383}
+  playerHolder: {fileID: 5066508272750312383}
   twodenvironment: {fileID: 1839783724}
   UI_Intraction: {fileID: 1500114506}
   canhack: 0
@@ -76383,9 +76384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f60164b5fb9a7c418293a4ce31d1837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerr: {fileID: 5180806856438107697}
+  ehc: {fileID: 954808444}
+  _PlayerMovement: {fileID: 6101769746840858096}
   threed_Environment: {fileID: 2003379838}
-  _Player: {fileID: 5066508272750312383}
+  playerHolder: {fileID: 5066508272750312383}
   twodenvironment: {fileID: 1927954629}
   UI_Intraction: {fileID: 342442395}
   canhack: 0
@@ -77839,9 +77841,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f60164b5fb9a7c418293a4ce31d1837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerr: {fileID: 5180806856438107697}
+  ehc: {fileID: 2828739414141288651}
+  _PlayerMovement: {fileID: 6101769746840858096}
   threed_Environment: {fileID: 2003379838}
-  _Player: {fileID: 5066508272750312383}
+  playerHolder: {fileID: 5066508272750312383}
   twodenvironment: {fileID: 1022697624211523582}
   UI_Intraction: {fileID: 6856549347931854907}
   canhack: 0
@@ -85440,6 +85443,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _is2Denabled: 0
 --- !u!23 &6117773592600760950
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -94927,9 +94931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f60164b5fb9a7c418293a4ce31d1837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerr: {fileID: 5180806856438107697}
+  ehc: {fileID: 3624467605172764446}
+  _PlayerMovement: {fileID: 6101769746840858096}
   threed_Environment: {fileID: 2003379838}
-  _Player: {fileID: 5066508272750312383}
+  playerHolder: {fileID: 5066508272750312383}
   twodenvironment: {fileID: 1338729678}
   UI_Intraction: {fileID: 789098923}
   canhack: 0

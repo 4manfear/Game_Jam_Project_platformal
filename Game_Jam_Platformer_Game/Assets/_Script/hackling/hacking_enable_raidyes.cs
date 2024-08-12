@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class hacking_enable_raidyes : MonoBehaviour
 {
+    public enenmy_Hacking_complete ehc;
+
     [SerializeField]
-    GameObject playerr;
+    private threed_Player_Movement _PlayerMovement;
     [SerializeField]
-    private GameObject threed_Environment, _Player, twodenvironment;
+    private GameObject threed_Environment, playerHolder, twodenvironment;
     [SerializeField]
     private GameObject UI_Intraction;
     [SerializeField]
@@ -31,30 +33,47 @@ public class hacking_enable_raidyes : MonoBehaviour
     {
         //playerr = GameObject.FindWithTag("Player");
 
-        float distanceToPlayer = Vector3.Distance(transform.position, playerr.transform.position);
+        if (_PlayerMovement)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, _PlayerMovement.transform.position);
 
-        if (distanceToPlayer <= detectionrange)
-        {
-            UI_Intraction.SetActive(true);
-            canhack = true;
-        }
-        if (distanceToPlayer > detectionrange)
-        {
-            UI_Intraction.SetActive(false);
-            canhack = false;
+            if (distanceToPlayer <= detectionrange)
+            {
+                UI_Intraction.SetActive(true);
+                canhack = true;
+            }
+            if (distanceToPlayer > detectionrange)
+            {
+                UI_Intraction.SetActive(false);
+                canhack = false;
+            }
         }
 
         if (canhack)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                UI_Intraction.SetActive(false);
-                threed_Environment.SetActive(false);
-                _Player.SetActive(false);
+                
                 twodenvironment.SetActive(true);
-                Destroy(this.gameObject);
+
+
+                // Destroy(this.gameObject);
+                //gameObject.SetActive(false);
+                //_PlayerMovement._is2Denabled = true;
             }
+
+
+
         }
+
+        if(twodenvironment.activeSelf)
+        {
+            UI_Intraction.SetActive(false);
+            threed_Environment.SetActive(false);
+            playerHolder.SetActive(false);
+        }
+
+        
     }
 
     private void OnDrawGizmosSelected()

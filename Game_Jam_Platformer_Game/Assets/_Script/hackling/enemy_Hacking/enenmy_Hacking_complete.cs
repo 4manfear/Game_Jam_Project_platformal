@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class enenmy_Hacking_complete : MonoBehaviour
@@ -7,8 +5,8 @@ public class enenmy_Hacking_complete : MonoBehaviour
     [SerializeField]
     private Animator anim;
 
-    [SerializeField]
-    private GameObject crackedthecode;
+    
+    public GameObject crackedthecode;
 
     [Header("enemy script")]
     [SerializeField]
@@ -29,7 +27,7 @@ public class enenmy_Hacking_complete : MonoBehaviour
 
             towdlevel.SetActive(false);
             threedlevel.SetActive(true);
-            player1.SetActiveRecursively(true);
+            player1.SetActive(true);
             enemy1.GetComponent<Enemy>().enabled = false;
             //enemy2.GetComponent<Enemy>().enabled = false;
             enemydistructioneffect1.SetActive(true);

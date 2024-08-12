@@ -38,7 +38,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        player = GameObject.FindWithTag("Player");
+        if (player)
+        {
+            player = GameObject.FindWithTag("Player");
+        }
 
         if (PlayerInSight())
         {
@@ -54,22 +57,25 @@ public class Enemy : MonoBehaviour
 
     private bool PlayerInSight()
     {
-        // Calculate the direction to the player
-        Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
-
-        // Check if the player is within the detection range
-        if (Vector3.Distance(transform.position, player.transform.position) <= detectionRange)
+        if (player)
         {
-            // Check if the player is within the detection angle
-            float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
-            if (angleToPlayer <= detectionAngle / 2f)
+            // Calculate the direction to the player
+            Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+
+            // Check if the player is within the detection range
+            if (Vector3.Distance(transform.position, player.transform.position) <= detectionRange)
             {
-                anim.SetFloat("movement_Cuntroller", 1f);
-                // Perform a raycast to see if there is a clear line of sight
-                if (!Physics.Raycast(transform.position, directionToPlayer, detectionRange, obstacleLayer))
+                // Check if the player is within the detection angle
+                float angleToPlayer = Vector3.Angle(transform.forward, directionToPlayer);
+                if (angleToPlayer <= detectionAngle / 2f)
                 {
-                    // Player is within range, within the field of view, and not obstructed by obstacles
-                    return true;
+                    anim.SetFloat("movement_Cuntroller", 1f);
+                    // Perform a raycast to see if there is a clear line of sight
+                    if (!Physics.Raycast(transform.position, directionToPlayer, detectionRange, obstacleLayer))
+                    {
+                        // Player is within range, within the field of view, and not obstructed by obstacles
+                        return true;
+                    }
                 }
             }
         }

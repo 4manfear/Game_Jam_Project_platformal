@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class enenmy_Hacking_completeed : MonoBehaviour
@@ -30,7 +28,7 @@ public class enenmy_Hacking_completeed : MonoBehaviour
 
             towdlevell.SetActive(false);
             threedlevell.SetActive(true);
-            player1l.SetActiveRecursively(true);
+            player1l.SetActive(true);
             enemy1l.GetComponent<Enemy>().enabled = false;
             enemy2l.GetComponent<Enemy>().enabled = false;
             enemydistructioneffect1l.SetActive(true);
