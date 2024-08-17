@@ -24,10 +24,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    private AudioSource audioSource;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         ednd = GetComponent<enemy_ded_and_not_ded>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -86,15 +89,33 @@ public class Enemy : MonoBehaviour
     private void PatrolBetweenPoints()
     {
         anim.SetFloat("movement_Cuntroller", 0f);
-        // If close to PointA, move to PointB
+
+        // Check the current destination and move to the other point if necessary
         if (Vector3.Distance(transform.position, PointA.position) < mindis)
         {
             agent.SetDestination(PointB.position);
+            HandleEnemyMovementSound(true); // Play sound if patrolling
         }
-        // If close to PointB, move to PointA
         else if (Vector3.Distance(transform.position, PointB.position) < mindis)
         {
             agent.SetDestination(PointA.position);
+            HandleEnemyMovementSound(true); // Play sound if patrolling
+        }
+        else
+        {
+            HandleEnemyMovementSound(false); // Stop sound if idle
+        }
+    }
+
+    private void HandleEnemyMovementSound(bool isMoving)
+    {
+        if (isMoving && !audioSource.isPlaying)
+        {
+            audioSource.Play(); // Start playing the audio if the enemy is moving
+        }
+        else if (!isMoving && audioSource.isPlaying)
+        {
+            audioSource.Stop(); // Stop the audio if the enemy is not moving
         }
     }
 

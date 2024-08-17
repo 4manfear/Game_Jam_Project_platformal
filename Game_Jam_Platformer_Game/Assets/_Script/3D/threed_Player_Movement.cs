@@ -22,6 +22,8 @@ public class threed_Player_Movement : MonoBehaviour
 
     private Rigidbody rb;
 
+    private AudioSource audioSource;
+
 
     [SerializeField]
     private float jumpForce = 5f; // Force applied for jumping
@@ -31,6 +33,7 @@ public class threed_Player_Movement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -63,6 +66,16 @@ public class threed_Player_Movement : MonoBehaviour
 
         // Apply the velocity to the Rigidbody
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+
+        // Check if the player is moving
+        if (movement.magnitude > 0 && !audioSource.isPlaying)
+        {
+            audioSource.Play(); // Start playing the audio if the player is moving and the audio is not already playing
+        }
+        else if (movement.magnitude == 0 && audioSource.isPlaying)
+        {
+            audioSource.Stop(); // Stop the audio if the player is not moving
+        }
     }
 
     private void HandleJump()

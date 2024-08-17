@@ -33,6 +33,9 @@ public class enenmy_Hacking_completeed : MonoBehaviour
             enemy2l.GetComponent<Enemy>().enabled = false;
             enemydistructioneffect1l.SetActive(true);
             enemydistructioneffect2l.SetActive(true);
+
+            Destroy(towdlevell);
+            
         }
     }
 }
