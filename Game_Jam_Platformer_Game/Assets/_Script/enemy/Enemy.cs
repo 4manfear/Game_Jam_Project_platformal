@@ -16,9 +16,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Transform PointA, PointB;
     [SerializeField] private float mindis = 1f; // Minimum distance to switch points
-    [SerializeField] private float detectionRange = 10f; // Range at which the enemy detects the player
-    [SerializeField] private float detectionAngle = 45f; // Angle of detection (field of view)
-    [SerializeField] private LayerMask playerLayer; // Layer of the player
+    [SerializeField] private float detectionRange = 20f; // Increased range for player detection
+    [SerializeField] private float detectionAngle = 90f; // Increased angle of detection
     [SerializeField] private LayerMask obstacleLayer; // Layer of obstacles that can block the raycast
 
     [SerializeField]
@@ -35,13 +34,12 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-      
         agent.SetDestination(PointA.position);
     }
 
     private void Update()
     {
-        if (player)
+        if (player == null)
         {
             player = GameObject.FindWithTag("Player");
         }
@@ -73,16 +71,27 @@ public class Enemy : MonoBehaviour
                 if (angleToPlayer <= detectionAngle / 2f)
                 {
                     anim.SetFloat("movement_Cuntroller", 1f);
+
                     // Perform a raycast to see if there is a clear line of sight
                     if (!Physics.Raycast(transform.position, directionToPlayer, detectionRange, obstacleLayer))
                     {
-                        // Player is within range, within the field of view, and not obstructed by obstacles
-                        return true;
+                        // Verify that the object hit by the raycast is the player using the tag
+                        RaycastHit hit;
+                        if (Physics.Raycast(transform.position, directionToPlayer, out hit, detectionRange))
+                        {
+                            if (hit.collider.CompareTag("Player"))
+                            {
+                                // Player is within range, within the field of view, and not obstructed by obstacles
+                                return true;
+                            }
+                        }
                     }
                 }
             }
         }
 
+        // If player is out of sight, return false and reset to patrol state
+        anim.SetFloat("movement_Cuntroller", 0f);
         return false;
     }
 
@@ -136,9 +145,9 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if(ednd.cancaught == true)
+            if (ednd.cancaught == true)
             {
                 SceneManager.LoadScene(5);
             }
